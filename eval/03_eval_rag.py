@@ -54,7 +54,7 @@ from src.vectorstore import vectorstore_01_chroma as VECTORSTORE
 # HuggingFace 접속 가능한 환경: reranker_01_crossencoder
 
 # from src.reranker import reranker_01_crossencoder as RERANKER
-from src.reranker import reranker_02_cohere as RERANKER
+from src.reranker import reranker_01_crossencoder as RERANKER
 
 # ── 라우터 (리트리버 자동 선택) ───────────────────────────────────────────────
 from src.retriever import router as ROUTER

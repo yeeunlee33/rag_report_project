@@ -318,7 +318,7 @@ def select_and_retrieve(
         intent:     "balanced" | "ensemble" (freeform_chain에서 전달)
         k:          반환할 청크 수
     """
-    ret1_instance, ret2_instance, all_docs = retrievers
+    ret1_instance, ret2_instance, all_docs, vectorstore = retrievers
 
     if intent == "balanced":
         print(f"  → retriever_02_balanced 사용 (증권사별 균등 샘플링)")
