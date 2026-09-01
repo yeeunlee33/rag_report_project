@@ -7,93 +7,46 @@ requires-python = ">=3.11,<3.13"
 dependencies = [
     "langchain>=0,<1",
     "langchain-core>=0,<1",
-    "langchain-experimental>=0,<1",
-    "langchain-community>=0,<1",
+    "langchain-experimental>=0,<1",      # SemanticChunker (chunking_02_semantic.py)
+    "langchain-community>=0,<1",         # BM25Retriever, Chroma fallback
     "langchain-openai>=0,<1",
-    "langchain-anthropic>=0,<1",
-    "langchain-text-splitters>=0,<1",
-    "langchain-elasticsearch>=0,<1",
+    "langchain-text-splitters>=0,<1",    # RecursiveCharacterTextSplitter
     "langchain-chroma>=0,<1",
-    "langchain-cohere>=0,<1",
-    "langchain-milvus>=0,<1",
-    "langchain-google-genai>=2,<3",
-    "langchain-huggingface>=0,<1",
-    "langchain-azure-ai>=0,<1",
-    "langchain-teddynote>=0,<1",
-    "langchainhub>=0,<1",
-    "langgraph>=0,<1",
-    "langsmith>=0,<1",
-    "huggingface-hub>=0,<1",
-    "openai>=1,<3",
-    "deepl>=1,<2",
-    "kiwipiepy>=0,<1",
-    "konlpy>=0,<1",
+    "openai>=1,<3",                      # Loader.py 가 직접 사용하는 raw client
+    "cohere>=5,<6",                      # reranker_02_cohere.py 가 직접 사용 (langchain-cohere 래퍼는 미사용)
+    "kiwipiepy>=0,<1",                   # retriever_01/02 형태소 분석
     # 데이터 처리 및 분석 관련 패키지
     "pandas>=2,<3",
-    "rank-bm25>=0,<1",
-    # 데이터베이스 및 캐시 관련 패키지
-    "redis>=5,<6",
+    "numpy>=1,<3",                       # eval/03_eval_rag.py, eval/04_eval_report.py 가 직접 사용
+    "rank-bm25>=0,<1",                   # BM25Retriever 내부에서 필요
+    # 벡터DB
     "chromadb>=0,<1",
-    # PDF 및 파일 처리 관련 패키지
-    "pymupdf>=1,<2",
-    "pypdf>=4,<5",
-    "pdfplumber>=0,<1",
-    "pdfminer-six==20231228",
-    "pymupdf4llm>=0,<1",
-    # 시각화 및 사용자 인터페이스 관련 패키지
-    "matplotlib>=3,<4",
+    # PDF 처리
+    "pymupdf4llm>=0,<1",                 # Loader.py 유일한 PDF 파서
+    # 웹 UI / API 서버
     "streamlit>=1,<2",
-    "jupyter>=1,<2",
-    "notebook>=7,<8",
-    "faiss-cpu>=1,<2",
-    # 기타 유틸리티 및 필수 패키지
-    "python-dotenv>=1,<2",
-    "pydantic>=2,<3",
-    "lxml>=5,<6",
-    "pillow>=10,<11",
-    "lark>=1,<2",
-    "ragas>=0.4,<0.5",
-    "unstructured[all-docs]>=0,<1",
-    "arxiv>=2,<3",
-    "tiktoken>=0,<1",
-    "tenacity>=8,<9",
-    "pymilvus>=2,<3",
-    "google-search-results>=2,<3",
-    "protobuf>=4,<5",
-    "sqlalchemy>=2,<3",
-    "llama-index-core>=0,<1",
-    "llama-parse>=0,<1",
-    "llama-index-readers-file>=0,<1",
-    "flashrank>=0,<1",
-    "docx2txt>=0,<1",
-    "nest-asyncio>=1,<2",
-    "rapidocr-onnxruntime>=1,<2",
-    "seaborn>=0,<1",
-    "grandalf>=0,<1",
-    "rouge-score>=0,<1",
-    "langchain-ollama>=0,<1",
-    "mypy>=1,<2",
-    "pinecone>=5,<6",
-    "wikipedia>=1,<2",
-    "scikit-learn>=1,<2",
-    "ipykernel",
-    "langchain-upstage>=0.7.4",
-    "sentence-transformers>=3.0.0",
-    "python-pptx>=1.0.2",
-    "jq>=1.11.0",
-    "chardet<6",
-    "langchain-pinecone>=0.2.3",
-    "setuptools<72",
-    "requests>=2,<3",
-    "beautifulsoup4>=4,<5",
-    # API 서버
     "fastapi>=0.111,<1",
     "uvicorn[standard]>=0.29,<1",
+    # 리랭커
+    "flashrank>=0,<1",                   # reranker_01_crossencoder.py
+    # 기타 유틸리티
+    "python-dotenv>=1,<2",
+    "pydantic>=2,<3",
+    "lxml>=5,<6",                        # naver_industry_crawler.py
+    "requests>=2,<3",                    # naver_industry_crawler.py
+    "beautifulsoup4>=4,<5",              # naver_industry_crawler.py
+    "tenacity>=8,<9",                    # api/main.py 재시도 로직
+    "ragas>=0.4,<0.5",                   # eval/ 파이프라인
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=8,<9",
+    # notebook/, src/processing/chunking/pp.ipynb 등 실험용 노트북 열 때만 필요
+    # (앱/API 실행에는 필요 없음)
+    "jupyter>=1,<2",
+    "notebook>=7,<8",
+    "ipykernel",
 ]
 
 [tool.pytest.ini_options]
