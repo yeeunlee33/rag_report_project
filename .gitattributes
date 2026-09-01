@@ -1,0 +1,21 @@
+# 텍스트 파일은 저장소에 LF로 저장, 체크아웃 시에도 LF 유지 (OS 무관하게 통일)
+* text=auto eol=lf
+
+# 명시적 텍스트 파일
+*.py    text eol=lf
+*.md    text eol=lf
+*.toml  text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.ipynb text eol=lf
+*.lock  text eol=lf
+*.gitignore text eol=lf
+
+# 바이너리 파일 (혹시 추적되더라도 줄바꿈 변환 금지)
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.pyc   binary
+*.db    binary
+*.sqlite3 binary
